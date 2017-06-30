@@ -13,4 +13,5 @@ public class FoodBean {
     public final ObservableField<String> image = new ObservableField<>();
     public final ObservableField<String> keywords = new ObservableField<>();
     public final ObservableField<String> summary = new ObservableField<>();
+
 }
