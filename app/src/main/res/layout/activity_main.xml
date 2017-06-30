@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" >
+
+    <data>
+        <variable
+            name="model"
+            type="com.tcl.john.studymvvm.viewmodel.UserViewModel"/>
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context="com.tcl.john.studymvvm.view.MainActivity">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{model.user.userName}" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{model.user.nickName}" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{String.valueOf(model.user.age)}" />
+
+        <!--三目运算-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{model.user.userName??model.user.nickName}" />
+
+        <!--字符拼接-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{`userName is :`+model.user.userName}" />
+
+        <!--根据数据来决定显示样式-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@{model.user.age &lt; 30 ? 0xFF0000FF:0xFFFF0000}"
+            android:text="@{String.valueOf(model.user.age)}" />
+
+        <!--绑定图片-->
+        <ImageView
+            android:id="@+id/user_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:avatar="@{model.user.avatar}" />
+
+        <Button
+            android:id="@+id/food_button"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_height="wrap_content"
+            android:text="跳转到食物列表"/>
+
+    </LinearLayout>
+
+</layout>
