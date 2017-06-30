@@ -632,7 +632,7 @@ public class FoodDetailAdapter extends RecyclerView.Adapter<FoodDetailAdapter.Fo
 ```
 
 ## **最终效果**
-![这里写图片描述](http://img.blog.csdn.net/20170629100510988?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvam9obldjaGV1bmc=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+<img src="https://github.com/coderJohnZhang/StudyMVVM/blob/master/screenrecord/demo.gif" width="600"><br><br>
 
 ## **总结**
 View层的Activity通过DataBinding生成Binding实例,把这个实例传递给ViewModel，ViewModel层通过把自身与Binding实例绑定，从而实现View中layout与ViewModel的双向绑定。
