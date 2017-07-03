@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         activityMainBinding.foodButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                userViewModel.onClick();
+                userViewModel.onFoodBtnClick();
             }
         });
     }

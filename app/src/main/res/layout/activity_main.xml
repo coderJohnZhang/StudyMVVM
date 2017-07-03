@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto" >
 
     <data>
+        <import type="android.view.View"/>
         <variable
             name="model"
             type="com.tcl.john.studymvvm.viewmodel.UserViewModel"/>
@@ -30,6 +31,20 @@
             android:layout_height="wrap_content"
             android:text="@{String.valueOf(model.user.age)}" />
 
+        <TextView
+            android:id="@+id/student_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="我是学生"
+            android:visibility="@{model.user.isStudent ? View.VISIBLE : View.INVISIBLE}" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="test"
+            android:textAllCaps="false"
+            android:onClick="@{model.onStudentBtnClick}" />
+
         <!--三目运算-->
         <TextView
             android:layout_width="wrap_content"
@@ -40,7 +55,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{`userName is :`+model.user.userName}" />
+            android:text="@{`userName is :` + model.user.userName}" />
 
         <!--根据数据来决定显示样式-->
         <TextView

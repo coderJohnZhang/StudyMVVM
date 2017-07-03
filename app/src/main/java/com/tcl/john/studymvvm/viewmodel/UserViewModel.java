@@ -2,6 +2,8 @@ package com.tcl.john.studymvvm.viewmodel;
 
 import android.content.Context;
 import android.databinding.BindingAdapter;
+import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
@@ -38,7 +40,11 @@ public class UserViewModel {
         user = userModel.getUserInfo();
     }
 
-    public void onClick() {
+    public void onFoodBtnClick() {
         FoodActivity.navigateTo(mContext);
+    }
+
+    public void onStudentBtnClick(View v) {
+        user.isStudent.set(!user.isStudent.get());
     }
 }
