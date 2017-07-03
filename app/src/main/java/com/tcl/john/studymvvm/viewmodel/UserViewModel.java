@@ -2,7 +2,6 @@ package com.tcl.john.studymvvm.viewmodel;
 
 import android.content.Context;
 import android.databinding.BindingAdapter;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -47,4 +46,5 @@ public class UserViewModel {
     public void onStudentBtnClick(View v) {
         user.isStudent.set(!user.isStudent.get());
     }
+
 }
