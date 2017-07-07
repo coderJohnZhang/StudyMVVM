@@ -10,20 +10,24 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.tcl.john.studymvvm.R;
-import com.tcl.john.studymvvm.bean.FoodBean;
 import com.tcl.john.studymvvm.databinding.ActivityFoodBinding;
+import com.tcl.john.studymvvm.event.FoodEvent;
 import com.tcl.john.studymvvm.viewmodel.food.FoodListViewModel;
 
-import java.util.List;
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 /**
- * 食物列表界面
+ * 食物列表界面，Activity或Fragment作为事件订阅者需要注册和取消注册事件
  * Created by ZhangJun on 2017/6/29.
  */
 
-public class FoodActivity extends AppCompatActivity implements FoodListViewModel.OnShowFoodListCallBack {
+public class FoodActivity extends AppCompatActivity {
 
     private RecyclerView mFoodsRv;
+
+    private FoodListViewModel mFoodListViewModel;
 
     public static void navigateTo(Context mContext) {
         Intent intent = new Intent(mContext , FoodActivity.class);
@@ -38,23 +42,39 @@ public class FoodActivity extends AppCompatActivity implements FoodListViewModel
         initFoodList(activityFoodBinding);
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    protected void onStop() {
+        EventBus.getDefault().unregister(this);
+        super.onStop();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+
     private void initFoodList(ActivityFoodBinding activityFoodBinding) {
-        FoodListViewModel foodListViewModel = new FoodListViewModel();
-        activityFoodBinding.setModel(foodListViewModel);
-        foodListViewModel.setOnShowFoodListCallBack(this);
+        mFoodListViewModel = new FoodListViewModel(this);
+        activityFoodBinding.setModel(mFoodListViewModel);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mFoodsRv = activityFoodBinding.foodRv;
         mFoodsRv.setLayoutManager(layoutManager);
     }
 
-    @Override
-    public void showFoodList(final List<FoodBean> foodList) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                mFoodsRv.setAdapter(new FoodDetailAdapter(foodList));
-            }
-        });
+    /**
+     * 订阅者实现事件处理方法（也称为“订阅方法”），在事件发布时将被调用。 这些被定义为@Subscribe注解。
+     * @param event
+     */
+    // Called in Android UI's main thread
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onFoodListEvent(FoodEvent.FoodListEvent event){
+        mFoodsRv.setAdapter(new FoodDetailAdapter(event.foodList));
     }
 
 }

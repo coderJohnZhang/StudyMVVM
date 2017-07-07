@@ -12,6 +12,7 @@ import com.tcl.john.studymvvm.view.food.FoodActivity;
 
 /**
  * User 的ViewModel
+ * ViewModel里面的内容有：context（view）、field(bean)、model、childViewModel、Message(Command、Event)
  * Created by ZhangJun on 2017/6/27.
  */
 

@@ -1,7 +1,14 @@
 package com.tcl.john.studymvvm.viewmodel.food;
 
+import android.content.Context;
+
 import com.tcl.john.studymvvm.bean.FoodBean;
+import com.tcl.john.studymvvm.bean.FoodListBean;
+import com.tcl.john.studymvvm.event.FoodEvent;
 import com.tcl.john.studymvvm.model.FoodModel;
+import com.tcl.john.studymvvm.viewmodel.widget.LoadingDialogViewModel;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
@@ -12,9 +19,15 @@ import java.util.List;
 
 public class FoodListViewModel implements FoodModel.OnUpdateFoodInfoCallBack {
 
-    private OnShowFoodListCallBack mOnShowFoodListCallBack;
+    public FoodListBean mFoodList;
 
-    public FoodListViewModel() {
+    private LoadingDialogViewModel mLoadingDialogViewModel;
+
+    private Context mContext;
+
+    public FoodListViewModel(Context context) {
+        mContext = context;
+        mFoodList = new FoodListBean();
         initFoodList();
     }
 
@@ -25,20 +38,25 @@ public class FoodListViewModel implements FoodModel.OnUpdateFoodInfoCallBack {
         FoodModel foodModel = FoodModel.getInstance();
         foodModel.setOnUpdateFoodInfoCallBack(this);
         foodModel.requestFoodInfo();
+
+        mLoadingDialogViewModel = new LoadingDialogViewModel(mContext);
+        mLoadingDialogViewModel.showLoadingDiaLog();
     }
 
+    /**
+     * ViewModel从Model拿到数据后，通过EventBus的post方法发送消息，传递相应数据给View
+     * @param foodList
+     */
     @Override
     public void updateFoodList(List<FoodBean> foodList) {
-        if (mOnShowFoodListCallBack != null) {
-            mOnShowFoodListCallBack.showFoodList(foodList);
+        mLoadingDialogViewModel.dismissLoadingDiaLog();
+        if (foodList != null && foodList.size() > 0) {
+            mFoodList.foodList.addAll(foodList);
+            mFoodList.isShowing.set(true);
+        } else {
+            mFoodList.isShowing.set(false);
         }
+        EventBus.getDefault().post(new FoodEvent.FoodListEvent(mFoodList.foodList));
     }
 
-    public interface OnShowFoodListCallBack {
-        void showFoodList(List<FoodBean> foodList);
-    }
-
-    public void setOnShowFoodListCallBack (OnShowFoodListCallBack onShowFoodListCallBack) {
-        mOnShowFoodListCallBack = onShowFoodListCallBack;
-    }
 }
