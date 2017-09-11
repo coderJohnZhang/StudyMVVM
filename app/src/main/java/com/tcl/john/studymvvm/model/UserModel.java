@@ -9,20 +9,16 @@ import com.tcl.john.studymvvm.bean.UserBean;
 
 public class UserModel {
 
-    private static UserModel sUserModel; // 防止创建多次，设置为单例
-
     private UserModel() {
-        // 通过getInstance()方法获取实例
+
     }
 
-    /**
-     * 获取当前类示例
-     */
-    public synchronized static UserModel getInstance() {
-        if (sUserModel == null) {
-            sUserModel = new UserModel();
-        }
-        return sUserModel;
+    private static class UserModelHolder {
+        private static final UserModel INSTANCE = new UserModel();
+    }
+
+    public static final UserModel getInstance() {
+        return UserModelHolder.INSTANCE;
     }
 
     public UserBean getUserInfo() {

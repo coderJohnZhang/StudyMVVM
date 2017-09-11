@@ -23,19 +23,18 @@ import okhttp3.Response;
 
 public class FoodModel {
 
-    private static FoodModel sFoodModel;
-
     private OnUpdateFoodInfoCallBack mOnUpdateFoodInfoCallBack;
 
     private FoodModel() {
 
     }
 
-    public synchronized static FoodModel getInstance() {
-        if (sFoodModel == null) {
-            sFoodModel = new FoodModel();
-        }
-        return sFoodModel;
+    private static class FoodModelHolder {
+        private static final FoodModel INSTANCE = new FoodModel();
+    }
+
+    public static final FoodModel getInstance() {
+        return FoodModelHolder.INSTANCE;
     }
 
     public void requestFoodInfo() {
