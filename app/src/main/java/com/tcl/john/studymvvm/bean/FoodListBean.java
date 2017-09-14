@@ -12,5 +12,5 @@ import android.databinding.ObservableList;
 public class FoodListBean {
 
     public final ObservableList<FoodBean> foodList = new ObservableArrayList<>();
-    public final ObservableBoolean isShowing = new ObservableBoolean();
+    public final ObservableBoolean isShowing = new ObservableBoolean(true);
 }

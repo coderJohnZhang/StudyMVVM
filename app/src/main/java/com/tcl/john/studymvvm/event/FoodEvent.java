@@ -11,19 +11,19 @@ import java.util.List;
 
 public class FoodEvent {
 
-    public static class FoodListEvent {
+    public static class FoodModelEvent {
         public List<FoodBean> foodList;
 
-        public FoodListEvent(List<FoodBean> foodList) {
+        public FoodModelEvent(List<FoodBean> foodList) {
             this.foodList = foodList;
         }
     }
 
-    public static class FoodItemEvent {
-        public FoodBean food;
+    public static class FoodViewModelEvent {
+        public List<FoodBean> foodList;
 
-        public FoodItemEvent(FoodBean food) {
-            this.food = food;
+        public FoodViewModelEvent(List<FoodBean> foodList) {
+            this.foodList = foodList;
         }
     }
 }

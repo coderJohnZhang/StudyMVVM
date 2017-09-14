@@ -2,13 +2,8 @@ package com.tcl.john.studymvvm.widget;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.databinding.DataBindingUtil;
-import android.databinding.ObservableField;
-import android.view.LayoutInflater;
 
 import com.tcl.john.studymvvm.R;
-import com.tcl.john.studymvvm.databinding.DialogLoadingBinding;
-import com.tcl.john.studymvvm.viewmodel.widget.LoadingDialogViewModel;
 
 /**
  * 自定义等待加载对话框
@@ -17,28 +12,23 @@ import com.tcl.john.studymvvm.viewmodel.widget.LoadingDialogViewModel;
 
 public class LoadingDialog extends Dialog {
 
-    public final ObservableField<String> message = new ObservableField<>();
-
-    private Context mContext;
-
-    public LoadingDialog(Context context, int theme, LoadingDialogViewModel viewModel) {
+    public LoadingDialog(Context context, int theme) {
         super(context, theme);
-        mContext = context;
-
-        DialogLoadingBinding dialogLoadingBinding = DataBindingUtil.inflate(LayoutInflater.from(mContext), R.layout.dialog_loading, null, false);
-        dialogLoadingBinding.setModel(viewModel);
-
-        setContentView(dialogLoadingBinding.getRoot());
+        setContentView(R.layout.dialog_loading);
         setCanceledOnTouchOutside(false);
     }
 
-    public void showDialog(){
-        if(isShowing())return;
+    public void showDialog() {
+        if (isShowing()) {
+            return;
+        }
         show();
     }
 
-    public void closeDialog(){
-        if(!isShowing())return;
+    public void closeDialog() {
+        if (!isShowing()) {
+            return;
+        }
         dismiss();
     }
 

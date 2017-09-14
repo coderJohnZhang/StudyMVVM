@@ -36,8 +36,9 @@ public class FoodDetailAdapter extends RecyclerView.Adapter<FoodDetailAdapter.Fo
 
     @Override
     public int getItemCount() {
-        if (mFoods == null)
+        if (mFoods == null) {
             return 0;
+        }
         return mFoods.size();
     }
 

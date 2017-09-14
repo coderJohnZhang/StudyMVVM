@@ -1,7 +1,9 @@
 package com.tcl.john.studymvvm.model;
 
 import com.tcl.john.studymvvm.bean.FoodBean;
+import com.tcl.john.studymvvm.event.FoodEvent;
 
+import org.greenrobot.eventbus.EventBus;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -23,8 +25,6 @@ import okhttp3.Response;
 
 public class FoodModel {
 
-    private OnUpdateFoodInfoCallBack mOnUpdateFoodInfoCallBack;
-
     private FoodModel() {
 
     }
@@ -43,7 +43,7 @@ public class FoodModel {
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-
+                EventBus.getDefault().post(new FoodEvent.FoodModelEvent(null));
             }
 
             @Override
@@ -78,16 +78,6 @@ public class FoodModel {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        if (mOnUpdateFoodInfoCallBack != null) {
-            mOnUpdateFoodInfoCallBack.updateFoodList(foodList);
-        }
-    }
-
-    public interface OnUpdateFoodInfoCallBack {
-        void updateFoodList(List<FoodBean> foodList);
-    }
-
-    public void setOnUpdateFoodInfoCallBack (OnUpdateFoodInfoCallBack onUpdateFoodInfoCallBack) {
-        mOnUpdateFoodInfoCallBack = onUpdateFoodInfoCallBack;
+        EventBus.getDefault().post(new FoodEvent.FoodModelEvent(foodList));
     }
 }
