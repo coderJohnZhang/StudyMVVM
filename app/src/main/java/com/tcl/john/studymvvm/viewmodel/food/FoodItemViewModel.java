@@ -1,12 +1,14 @@
 package com.tcl.john.studymvvm.viewmodel.food;
 
 import android.databinding.BindingAdapter;
+import android.databinding.ObservableField;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 import com.tcl.john.studymvvm.bean.FoodBean;
+import com.tcl.john.studymvvm.view.MainActivity;
 
 /**
  * Food 的ViewModel
@@ -29,6 +31,10 @@ public class FoodItemViewModel {
     }
 
     public void onItemClick(View view) {
-        Toast.makeText(view.getContext(), food.description.get(), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(view.getContext(), food.description.get(), Toast.LENGTH_SHORT).show();
+        //测试传递序列化对象
+        ObservableField<FoodBean> foodBean = new ObservableField<>();
+        foodBean.set(food);
+        MainActivity.navigateTo(view.getContext(), foodBean);
     }
 }
