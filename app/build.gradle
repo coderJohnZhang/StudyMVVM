@@ -1,4 +1,7 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android-extensions'
 
 def gitVersionCode() {
     def cmd = 'git rev-list HEAD --first-parent --count'
@@ -65,6 +68,8 @@ dependencies {
     compile 'com.squareup.okhttp3:okhttp:3.8.1'
     compile 'org.greenrobot:eventbus:3.0.0'
     testCompile 'junit:junit:4.12'
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    kapt "com.android.databinding:compiler:$android_plugin_version"
 }
 
 class TimingsListener implements TaskExecutionListener, BuildListener {
@@ -83,12 +88,13 @@ class TimingsListener implements TaskExecutionListener, BuildListener {
             task.project.logger.warn "inputs.files.files: -----------end---------- "
         }
     }
+
     @Override
     void afterExecute(Task task, TaskState taskState) {
         def ms = clock.timeInMs
         timings.add([ms, task.path])
         task.project.logger.warn "${task.path} took ${ms}ms"
-        if(task.outputs.files.files) {
+        if (task.outputs.files.files) {
             task.project.logger.warn "taskName:${task.name}"
             task.project.logger.warn "outputs.files.files: ------------start----------------- "
             task.outputs.files.files.each {
@@ -122,4 +128,7 @@ class TimingsListener implements TaskExecutionListener, BuildListener {
 }
 
 gradle.addListener new TimingsListener()
+repositories {
+    mavenCentral()
+}
 
