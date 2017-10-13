@@ -13,7 +13,7 @@ import com.tcl.john.studymvvm.bean.FoodBean
 
 class FoodEvent {
 
-    class FoodModelEvent(var foodList: List<FoodBean>)
+    class FoodModelEvent(var foodList: List<FoodBean>?)
 
     class FoodViewModelEvent(var foodList: List<FoodBean>)
 }

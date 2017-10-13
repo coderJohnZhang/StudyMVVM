@@ -54,6 +54,8 @@ class FoodActivity : AppCompatActivity() {
     }
 
     override fun onDestroy() {
+        mLoadingDialog!!.closeDialog()
+        mLoadingDialog = null
         super.onDestroy()
     }
 

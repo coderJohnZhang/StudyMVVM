@@ -40,7 +40,7 @@ class FoodModel private constructor() {
         val request = Request.Builder().url("http://www.tngou.net/api/food/list?id=1").build()
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
-                EventBus.getDefault().post(FoodEvent.FoodModelEvent(null!!))
+                EventBus.getDefault().post(FoodEvent.FoodModelEvent(null))
             }
 
             @Throws(IOException::class)

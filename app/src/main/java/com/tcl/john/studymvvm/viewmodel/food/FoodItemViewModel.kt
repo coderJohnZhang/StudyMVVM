@@ -22,9 +22,7 @@ class FoodItemViewModel(var food: FoodBean) {
     fun onItemClick(view: View) {
         //Toast.makeText(view.getContext(), food.description.get(), Toast.LENGTH_SHORT).show();
         //测试传递序列化对象
-        val foodBean = ObservableField<FoodBean>()
-        foodBean.set(food)
-        MainActivity.navigateTo(view.context, foodBean)
+        MainActivity.navigateTo(view.context, food)
     }
 
     companion object {
