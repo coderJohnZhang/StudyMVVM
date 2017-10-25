@@ -11,6 +11,7 @@ import android.util.Log
 import com.tcl.john.studymvvm.R
 import com.tcl.john.studymvvm.bean.FoodBean
 import com.tcl.john.studymvvm.databinding.ActivityMainBinding
+import com.tcl.john.studymvvm.utils.CallJavaUtils
 import com.tcl.john.studymvvm.viewmodel.UserViewModel
 
 /**
@@ -40,6 +41,9 @@ class MainActivity : AppCompatActivity() {
         if (null != intent.getSerializableExtra(KEY_EXTRA_FOOD)) {
             foodBean = intent?.getSerializableExtra(KEY_EXTRA_FOOD) as FoodBean
         }
+        //测试Kotlin传递可变长参数给Java可变参数方法
+        var numbers:IntArray = intArrayOf(1, 2, 3, 4, 5)
+        CallJavaUtils.addNumbers("add", *numbers)
         Log.d(TAG, "food = " + foodBean)
 
     }
