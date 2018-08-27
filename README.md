@@ -21,7 +21,7 @@
   - ViewModel ： 创建关联，将model和view绑定起来。当我们model更改后，会通过viewmodel反馈给view。
 
   可以看到，MVVM模式的最大亮点是双向绑定。
-  ![这里写图片描述](http://img.blog.csdn.net/20170627235146760?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvam9obldjaGV1bmc=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+  ![这里写图片描述](https://github.com/coderJohnZhang/StudyMVVM/blob/master/screenrecord/img.png)
 
 - Data Binding
 
@@ -640,7 +640,7 @@ View层的Activity通过DataBinding生成Binding实例,把这个实例传递给V
 如果不引入ViewModel这一层，还会有一个缺点：一个xml中可能会涉及到多个数据对象，那么我们只有把这个多个数据对象都引入进来，xml布局的清晰程度胡下降，通过这种方法，我们的layout文件中data标签中只需要引入ViewModel就可以了，其它的数据对象统一在ViewModel中一并处理。
 
 关于三者的协作关系可以如下图表示：
-![这里写图片描述](http://img.blog.csdn.net/20170629100709859?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvam9obldjaGV1bmc=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+![这里写图片描述](https://github.com/coderJohnZhang/StudyMVVM/blob/master/screenrecord/img2.png)
 
 **MVVM的问题**
 
